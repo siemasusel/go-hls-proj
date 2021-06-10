@@ -13,7 +13,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 )
 
-var command_templ = "ffmpeg -i %s -profile:v baseline -level 3.0 -s 640x360 -start_number 0 -hls_time 10 -hls_list_size 0 -f hls %s"
+var commandTempl = "ffmpeg -i %s -profile:v baseline -level 3.0 -s 640x360 -start_number 0 -hls_time 10 -hls_list_size 0 -f hls %s"
 var allowedExts = map[string]bool{
 	".mp4": true,
 	".mov": true,
@@ -91,7 +91,7 @@ func (t *Transcoder) addProcVideo(path string) {
 func (t *Transcoder) procVideo(path string) {
 	filename := filepath.Base(path)
 	outpath := t.getOutpath(path)
-	command := fmt.Sprintf(command_templ, path, outpath)
+	command := fmt.Sprintf(commandTempl, path, outpath)
 	args := strings.Split(command, " ")
 	log.Println("Processing file", filename)
 	t.addProcVideo(outpath)
